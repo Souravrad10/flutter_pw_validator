@@ -33,7 +33,7 @@ class FlutterPwValidator extends StatefulWidget {
       this.number = 0,
       this.defaultColor = MyColors.grey,
       this.successColor = MyColors.green,
-      this.failureColor = MyColors.red,
+      this.failureColor = MyColors.error,
       this.strings,
       this.onFail,}) {
     //Initial entered size for global use
