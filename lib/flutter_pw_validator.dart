@@ -75,15 +75,6 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
         widget.translatedStrings.minLength,
         hasMinLength);
 
-   /* hasMinNormalChar = conditionsHelper.checkCondition(
-        widget.number,
-        validator.hasMinNormalChar,
-        widget.controller,
-        widget.translatedStrings.capitalLetters,
-        hasMinNormalChar);*/
-
-
-
     hasMinLowercaseChar = conditionsHelper.checkCondition(
         widget.smallLetters,
         validator.hasMinLowercase,
@@ -161,48 +152,44 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
   @override
   void dispose() {
     super.dispose();
+    widget.controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: SizeConfig.width,
-      height: widget.height,
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: Flexible(
-        flex: 7,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-            //Iterate through the condition map entries and generate new ValidationTextWidget for each item in Green or Red Color
-            children: conditionsHelper.getter()!.entries.map((entry) {
-              int? value;
-              if (entry.key == widget.translatedStrings.minLength) {
-                value = widget.minLength;
-              }
-              if (entry.key == widget.translatedStrings.capitalLetters) {
-                value = widget.number;
-              }
-              if (entry.key == widget.translatedStrings.smallLetters) {
-                value = widget.capitalLetters;
-              }
-              if (entry.key == widget.translatedStrings.number) {
-                value = widget.smallLetters;
-              }
-              if (entry.key == widget.translatedStrings.specialCharacters) {
-                value = widget.specialCharCount;
-              }
-              return ValidationTextWidget(
-                color: isFirstRun
-                    ? widget.defaultColor
-                    : entry.value
-                        ? widget.successColor
-                        : widget.failureColor,
-                text: entry.key,
-                value: value,
-              );
-            }).toList()),
-      ),
+      height: SizeConfig.height,
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+          //Iterate through the condition map entries and generate new ValidationTextWidget for each item in Green or Red Color
+          children: conditionsHelper.getter()!.entries.map((entry) {
+            int? value;
+            if (entry.key == widget.translatedStrings.minLength) {
+              value = widget.minLength;
+            }
+            if (entry.key == widget.translatedStrings.capitalLetters) {
+              value = widget.number;
+            }
+            if (entry.key == widget.translatedStrings.smallLetters) {
+              value = widget.capitalLetters;
+            }
+            if (entry.key == widget.translatedStrings.number) {
+              value = widget.smallLetters;
+            }
+            if (entry.key == widget.translatedStrings.specialCharacters) {
+              value = widget.specialCharCount;
+            }
+            return ValidationTextWidget(
+              color: isFirstRun
+                  ? widget.defaultColor
+                  : entry.value
+                      ? widget.successColor
+                      : widget.failureColor,
+              text: entry.key,
+              value: value,
+            );
+          }).toList()),
     );
   }
 }
