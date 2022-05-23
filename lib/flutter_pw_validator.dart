@@ -180,6 +180,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
               value = widget.specialCharCount;
             }
             return ValidationTextWidget(
+
               svgPicture:
               isFirstRun ?
               SvgPicture.asset('assets/svg/ic_default.svg') :
@@ -191,6 +192,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
                   : widget.failureColor,
               text: entry.key,
               value: value,
+
             );
           }).toList()),
     );

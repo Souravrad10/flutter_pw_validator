@@ -19,17 +19,24 @@ class ValidationTextWidget extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: SizeConfig.width! * 0.03,
-          height: SizeConfig.width! * 0.03,
-          child: CircleAvatar(
-            child: svgPicture,
+          width: 12,
+          height: 12,
+          color: Colors.transparent,
+          child: Opacity(
+            opacity: 0.7,
+            child: CircleAvatar(
+              child: svgPicture,
+              backgroundColor: Colors.transparent,
+              foregroundColor: color.withOpacity(0.8),
+
+            ),
           ),
         ),
         Padding(
           padding: EdgeInsets.only(left: SizeConfig.width! * 0.03),
           child: Text(
             text.replaceFirst("-", value.toString()),
-            style: themeData.textTheme.bodyText2?.copyWith(color: color,
+            style: themeData.textTheme.bodyText2?.copyWith(color: color.withOpacity(0.8),
           fontWeight: FontWeight.w400,
               fontSize: 12,
               height: 1.25,
