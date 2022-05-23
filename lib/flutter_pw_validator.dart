@@ -3,6 +3,7 @@ library flutter_pw_validator;
 import 'package:flutter/material.dart';
 import 'package:flutter_pw_validator/Utilities/ConditionsHelper.dart';
 import 'package:flutter_pw_validator/Utilities/Validator.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'Components/ValidationTextWidget.dart';
 import 'Resource/MyColors.dart';
 import 'Resource/Strings.dart';
@@ -21,21 +22,20 @@ class FlutterPwValidator extends StatefulWidget {
   final TextEditingController controller;
   final FlutterPwValidatorStrings? strings;
 
-  FlutterPwValidator(
-      {required this.width,
-      required this.height,
-      required this.minLength,
-      required this.onSuccess,
-      required this.controller,
-      this.capitalLetters = 0,
-      this.smallLetters = 0,
-      this.specialCharCount = 0,
-      this.number = 0,
-      this.defaultColor = MyColors.grey,
-      this.successColor = MyColors.green,
-      this.failureColor = MyColors.error,
-      this.strings,
-      this.onFail,}) {
+  FlutterPwValidator({required this.width,
+    required this.height,
+    required this.minLength,
+    required this.onSuccess,
+    required this.controller,
+    this.capitalLetters = 0,
+    this.smallLetters = 0,
+    this.specialCharCount = 0,
+    this.number = 0,
+    this.defaultColor = MyColors.grey,
+    this.successColor = MyColors.green,
+    this.failureColor = MyColors.error,
+    this.strings,
+    this.onFail,}) {
     //Initial entered size for global use
     SizeConfig.width = width;
     SizeConfig.height = height;
@@ -113,7 +113,6 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
       widget.onSuccess();
       widget.successColor.green;
     } else if (widget.onFail != null) {
-
       widget.onFail!();
       widget.failureColor.red;
     }
@@ -162,7 +161,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
       height: SizeConfig.height,
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
-          //Iterate through the condition map entries and generate new ValidationTextWidget for each item in Green or Red Color
+        //Iterate through the condition map entries and generate new ValidationTextWidget for each item in Green or Red Color
           children: conditionsHelper.getter()!.entries.map((entry) {
             int? value;
             if (entry.key == widget.translatedStrings.minLength) {
@@ -181,11 +180,15 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
               value = widget.specialCharCount;
             }
             return ValidationTextWidget(
+              svgPicture:
+              isFirstRun ?
+              SvgPicture.asset('assets/svg/ic_default.svg') :
+              entry.value ? SvgPicture.asset('assets/svg/ic_success.svg'): SvgPicture.asset('assets/svg/ic_error.svg'),
               color: isFirstRun
                   ? widget.defaultColor
                   : entry.value
-                      ? widget.successColor
-                      : widget.failureColor,
+                  ? widget.successColor
+                  : widget.failureColor,
               text: entry.key,
               value: value,
             );

@@ -23,7 +23,6 @@ class ValidationTextWidget extends StatelessWidget {
           height: SizeConfig.width! * 0.03,
           child: CircleAvatar(
             child: svgPicture,
-            backgroundColor: color,
           ),
         ),
         Padding(
