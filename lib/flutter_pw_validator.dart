@@ -148,11 +148,11 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
     });
   }
 
-  @override
+/*  @override
   void dispose() {
     super.dispose();
     widget.controller.dispose();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
